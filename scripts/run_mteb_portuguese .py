@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("main")
 
 classification_tasks = [
-    "AmazonPolarityClassification"
+    "BrazilianCourtDecisionsClassification"
 ]
 
 task = classification_tasks
