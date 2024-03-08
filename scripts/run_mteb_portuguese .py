@@ -9,17 +9,19 @@ logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger("main")
 
-classification_tasks = [
+TASK_LIST_CLASSIFICATION = [
     "BrazilianCourtDecisionsClassification"
 ]
 
-task = classification_tasks
+TASK_LIST = (
+    TASK_LIST_CLASSIFICATION
+)
 
-model_name = "intfloat/multilingual-e5-small"
-model = SentenceTransformer(model_name, device='cpu')
+model_name = "average_word_embeddings_komninos"
+model = SentenceTransformer(model_name)
 
-#for task in TASK_LIST:
-logger.info(f"Running task: {task}")
-eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
-evaluation = MTEB(tasks=[task], task_langs=["pt"])  # Remove "en" for running all languages
-evaluation.run(model, output_folder=f"results/{model_name}", eval_splits=eval_splits)
+for task in TASK_LIST:
+    logger.info(f"Running task: {task}")
+    eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
+    evaluation = MTEB(tasks=[task], task_langs=["en"])  # Remove "en" for running all languages
+    evaluation.run(model, output_folder=f"results/{model_name}", eval_splits=eval_splits)
