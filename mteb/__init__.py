@@ -4,6 +4,7 @@ from mteb.evaluation import *
 
 
 MTEB_MAIN_EN = [
+    "BrazilianCourtDecisionsClassification",
     "AmazonCounterfactualClassification",
     "AmazonPolarityClassification",
     "AmazonReviewsClassification",
