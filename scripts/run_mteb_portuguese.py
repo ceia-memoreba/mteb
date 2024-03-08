@@ -2,12 +2,11 @@
 
 import logging
 
+import logging
 from mteb import MTEB
 from sentence_transformers import SentenceTransformer
 
 logging.basicConfig(level=logging.INFO)
-
-logger = logging.getLogger("main")
 
 TASK_LIST_CLASSIFICATION = [
     "BrazilianCourtDecisionsClassification"
@@ -19,9 +18,6 @@ TASK_LIST = (
 
 model_name = "average_word_embeddings_komninos"
 model = SentenceTransformer(model_name)
+evaluation = MTEB(tasks=[ "BrazilianCourtDecisionsClassification"])
+evaluation.run(model, output_folder=f"results/{model_name}", eval_splits=["test"])
 
-for task in TASK_LIST:
-    logger.info(f"Running task: {task}")
-    eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
-    evaluation = MTEB(tasks=[task], task_langs=["en"])  # Remove "en" for running all languages
-    evaluation.run(model, output_folder=f"results/{model_name}", eval_splits=eval_splits)
