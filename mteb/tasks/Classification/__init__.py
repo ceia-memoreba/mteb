@@ -1,1 +1,1 @@
-from .BrazilianCourtDecisionsClassification import *
+from .portuguese.BrazilianCourtDecisionsClassification import *
